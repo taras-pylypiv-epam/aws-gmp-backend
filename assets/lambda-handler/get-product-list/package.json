@@ -1,0 +1,17 @@
+{
+  "name": "get-product-list",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.150",
+    "@types/node": "^24.0.10",
+    "typescript": "^5.8.3"
+  }
+}

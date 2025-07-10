@@ -1,5 +1,5 @@
 import { APIGatewayEvent, APIGatewayProxyResult } from 'aws-lambda';
-import { products } from './products';
+import { products } from '/opt/nodejs/products';
 
 export async function handler(event: APIGatewayEvent): Promise<APIGatewayProxyResult> {
   const { pathParameters } = event;
@@ -13,7 +13,7 @@ export async function handler(event: APIGatewayEvent): Promise<APIGatewayProxyRe
   }
 
   return {
-    body: JSON.stringify(product),
+    body: JSON.stringify({ data: product }),
     statusCode: 200,
   };
 }

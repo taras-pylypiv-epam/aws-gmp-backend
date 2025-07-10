@@ -22,8 +22,13 @@
     "strictPropertyInitialization": false,
     "typeRoots": [
       "./node_modules/@types"
-    ]
+    ],
+    "outDir": "./dist",
+    "paths": {
+      "/opt/nodejs/*": ["./assets/layers/products/nodejs/*"]
+    }
   },
+  "include": ["assets/**/*"],
   "exclude": [
     "node_modules",
     "cdk.out"
