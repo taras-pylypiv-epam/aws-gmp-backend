@@ -1,18 +1,8 @@
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as apigateway from 'aws-cdk-lib/aws-apigateway';
 import * as cdk from 'aws-cdk-lib';
-import * as path from 'path';
 import { Construct } from 'constructs';
-
-const ASSETS_PATH = '/../../assets';
-
-function buildAssetPath(assetName: string, assetType?: string) {
-  if (assetType === 'layer') {
-    return path.join(__dirname, `${ASSETS_PATH}/layers/${assetName}/dist`);
-  }
-
-  return path.join(__dirname, `${ASSETS_PATH}/lambda-handler/${assetName}/dist/index.zip`);
-}
+import { buildAssetPath, AssetType } from '../../utils/assets';
 
 export class ProductServiceStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -20,7 +10,7 @@ export class ProductServiceStack extends cdk.Stack {
 
     const productsLayer = new lambda.LayerVersion(this, 'products-layer', {
       compatibleRuntimes: [lambda.Runtime.NODEJS_20_X],
-      code: lambda.Code.fromAsset(buildAssetPath('products', 'layer')),
+      code: lambda.Code.fromAsset(buildAssetPath('products', AssetType.Layer)),
     });
 
     const getProductListLambda = new lambda.Function(this, 'get-product-list', {
