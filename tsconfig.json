@@ -20,17 +20,17 @@
     "inlineSources": true,
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
+    "isolatedModules": true,
     "typeRoots": [
       "./node_modules/@types"
     ],
-    "outDir": "./dist",
     "paths": {
-      "/opt/nodejs/*": ["./assets/layers/products/nodejs/*"]
+      "/opt/nodejs/*": ["./assets/layers/products/*"]
     }
   },
-  "include": ["assets/**/*"],
   "exclude": [
     "node_modules",
-    "cdk.out"
+    "cdk.out",
+    "assets/**/*"
   ]
 }

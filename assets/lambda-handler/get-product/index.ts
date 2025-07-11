@@ -1,9 +1,11 @@
 import { APIGatewayEvent, APIGatewayProxyResult } from 'aws-lambda';
 import { products } from '/opt/nodejs/products';
 
+const PRODUCTS = [...products];
+
 export async function handler(event: APIGatewayEvent): Promise<APIGatewayProxyResult> {
   const { pathParameters } = event;
-  const product = products.find((productEntry) => productEntry.id === pathParameters?.product_id);
+  const product = PRODUCTS.find((productEntry) => productEntry.id === pathParameters?.product_id);
 
   if (!product) {
     return {

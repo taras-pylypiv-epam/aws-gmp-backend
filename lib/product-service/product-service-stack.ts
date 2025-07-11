@@ -4,13 +4,23 @@ import * as cdk from 'aws-cdk-lib';
 import * as path from 'path';
 import { Construct } from 'constructs';
 
+const ASSETS_PATH = '/../../assets';
+
+function buildAssetPath(assetName: string, assetType?: string) {
+  if (assetType === 'layer') {
+    return path.join(__dirname, `${ASSETS_PATH}/layers/${assetName}/dist`);
+  }
+
+  return path.join(__dirname, `${ASSETS_PATH}/lambda-handler/${assetName}/dist/index.zip`);
+}
+
 export class ProductServiceStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
     const productsLayer = new lambda.LayerVersion(this, 'products-layer', {
       compatibleRuntimes: [lambda.Runtime.NODEJS_20_X],
-      code: lambda.Code.fromAsset(path.join(__dirname, '/../../dist/layers/products')),
+      code: lambda.Code.fromAsset(buildAssetPath('products', 'layer')),
     });
 
     const getProductListLambda = new lambda.Function(this, 'get-product-list', {
@@ -18,7 +28,7 @@ export class ProductServiceStack extends cdk.Stack {
       memorySize: 1024,
       timeout: cdk.Duration.seconds(5),
       handler: 'index.handler',
-      code: lambda.Code.fromAsset(path.join(__dirname, '/../../dist/lambda-handler/get-product-list')),
+      code: lambda.Code.fromAsset(buildAssetPath('get-product-list')),
       layers: [productsLayer],
     });
 
@@ -27,7 +37,7 @@ export class ProductServiceStack extends cdk.Stack {
       memorySize: 1024,
       timeout: cdk.Duration.seconds(5),
       handler: 'index.handler',
-      code: lambda.Code.fromAsset(path.join(__dirname, '/../../dist/lambda-handler/get-product')),
+      code: lambda.Code.fromAsset(buildAssetPath('get-product')),
       layers: [productsLayer],
     });
 

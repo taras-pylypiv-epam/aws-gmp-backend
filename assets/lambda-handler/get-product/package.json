@@ -3,15 +3,16 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc -w"
+    "prebuild": "rm -rf dist",
+    "build": "esbuild index.ts --bundle --minify --sourcemap --platform=node --target=es2020 --outfile=dist/index.js",
+    "postbuild": "cd dist && zip -r index.zip index.js*"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
     "@types/aws-lambda": "^8.10.150",
-    "@types/node": "^24.0.10",
+    "esbuild": "^0.25.6",
     "typescript": "^5.8.3"
   }
 }

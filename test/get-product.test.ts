@@ -1,6 +1,6 @@
 import { APIGatewayEvent } from 'aws-lambda';
 import { handler } from '../assets/lambda-handler/get-product';
-import { products } from '../assets/layers/products/nodejs/products';
+import { products } from '../assets/layers/products/products';
 
 describe('Get product lambda handler', () => {
   test('should return product by id', async () => {
