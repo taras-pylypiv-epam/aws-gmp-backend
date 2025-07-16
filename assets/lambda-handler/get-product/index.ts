@@ -15,7 +15,12 @@ export async function handler(event: APIGatewayEvent): Promise<APIGatewayProxyRe
   }
 
   return {
-    body: JSON.stringify({ data: product }),
+    body: JSON.stringify(product),
+    headers: {
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Origin': 'http://localhost:3000',
+      'Access-Control-Allow-Methods': 'GET'
+    },
     statusCode: 200,
   };
 }
