@@ -1,0 +1,17 @@
+{
+  "name": "products",
+  "version": "1.0.0",
+  "main": "products.js",
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "esbuild products.ts --bundle --minify --sourcemap --platform=node --target=es2020 --outfile=dist/nodejs/products.js",
+    "postbuild": "cd dist/nodejs && zip -r products.zip products.js*"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "esbuild": "^0.25.6",
+    "typescript": "^5.8.3"
+  }
+}
