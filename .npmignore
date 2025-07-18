@@ -1,6 +1,8 @@
 *.ts
 !*.d.ts
 dist
+.env
+.vscode
 
 # CDK asset staging directory
 .cdk.staging
